@@ -1,0 +1,13 @@
+{
+    "checked": true,
+    "description": "You can manage email addresses in your email settings.",
+    "disabled": false,
+    "label": "Email",
+    "name": "name_6573200789",
+    "placeholder": "Select a verified email to display",
+    "required": true,
+    "rowIndex": 0,
+    "type": "",
+    "value": "",
+    "variant": "Select"
+  }

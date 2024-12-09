@@ -1,0 +1,13 @@
+{
+    "checked": true,
+    "description": "You can manage your mobile notifications in the mobile settings page.",
+    "disabled": false,
+    "label": "Use different settings for my mobile devices",
+    "name": "name_3857907674",
+    "placeholder": "Placeholder",
+    "required": true,
+    "rowIndex": 0,
+    "type": "",
+    "value": "",
+    "variant": "Checkbox"
+}

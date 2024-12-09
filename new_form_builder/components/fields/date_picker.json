@@ -1,0 +1,13 @@
+{
+    "checked": true,
+    "description": "Your date of birth is used to calculate your age.",
+    "disabled": false,
+    "label": "Date of birth",
+    "name": "name_1641228259",
+    "placeholder": "Placeholder",
+    "required": true,
+    "rowIndex": 0,
+    "type": "",
+    "value": "",
+    "variant": "Date Picker"
+}

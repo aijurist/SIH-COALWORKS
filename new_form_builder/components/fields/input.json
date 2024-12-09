@@ -1,0 +1,13 @@
+{
+    "checked": true,
+    "description": "This is your public display name.",
+    "disabled": false,
+    "label": "Username",
+    "name": "name_4798353484",
+    "placeholder": "shadcn",
+    "required": true,
+    "rowIndex": 0,
+    "type": "",
+    "value": "",
+    "variant": "Input"
+  }

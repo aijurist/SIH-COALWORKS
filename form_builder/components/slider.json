@@ -1,0 +1,13 @@
+{
+    "checked": true,
+    "description": "Adjust the price by sliding.",
+    "disabled": false,
+    "label": "Set Price Range",
+    "name": "name_6242827925",
+    "placeholder": "Placeholder",
+    "required": true,
+    "rowIndex": 0,
+    "type": "",
+    "value": "",
+    "variant": "Slider"
+  }

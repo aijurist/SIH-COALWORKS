@@ -1,0 +1,13 @@
+{
+    "checked": true,
+    "description": "Enter your phone number.",
+    "disabled": false,
+    "label": "Phone number",
+    "name": "name_0336414959",
+    "placeholder": "Placeholder",
+    "required": true,
+    "rowIndex": 0,
+    "type": "",
+    "value": "",
+    "variant": "Phone"
+}

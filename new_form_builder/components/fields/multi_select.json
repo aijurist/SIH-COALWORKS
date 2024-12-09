@@ -1,0 +1,13 @@
+{
+    "checked": true,
+    "description": "Select multiple options.",
+    "disabled": false,
+    "label": "Select your framework",
+    "name": "name_5403767303",
+    "placeholder": "Placeholder",
+    "required": true,
+    "rowIndex": 0,
+    "type": "",
+    "value": "",
+    "variant": "Multi Select"
+  }

@@ -1,0 +1,186 @@
+{
+  "form_name": "Coal Mine Blasting Operation Record",
+  "form_description": "Comprehensive documentation of coal mine blasting operations, adhering to Indian mining safety standards.",
+  "sections": [
+    {
+      "section_name": "General Information",
+      "section_description": "Basic details about the blasting operation.",
+      "fields": [
+        {
+          "label": "Mine Name",
+          "name": "mine_name",
+          "type": "Text",
+          "description": "Name of the coal mine.",
+          "placeholder": "Enter mine name",
+          "required": true,
+          "disabled": false,
+          "variant": "Input",
+          "value": "",
+          "checked": true,
+          "rowIndex": 0
+        },
+        {
+          "label": "Date",
+          "name": "date",
+          "type": "Date Picker",
+          "description": "Date of the blasting operation.",
+          "placeholder": "Select date",
+          "required": true,
+          "disabled": false,
+          "variant": "Date Picker",
+          "value": "",
+          "checked": true,
+          "rowIndex": 0
+        },
+        {
+          "label": "Shift",
+          "name": "shift",
+          "type": "Select",
+          "description": "Shift during which the blasting occurred.",
+          "placeholder": "Select shift",
+          "required": true,
+          "disabled": false,
+          "variant": "Combobox",
+          "value": "",
+          "checked": true,
+          "rowIndex": 0,
+          "options": [
+            {
+              "label": "Day",
+              "value": "day"
+            },
+            {
+              "label": "Night",
+              "value": "night"
+            }
+          ]
+        },
+        {
+          "label": "Area/Location",
+          "name": "area",
+          "type": "Text",
+          "description": "Specific area within the mine.",
+          "placeholder": "Enter area/location",
+          "required": true,
+          "disabled": false,
+          "variant": "Input",
+          "value": "",
+          "checked": true,
+          "rowIndex": 0
+        }
+      ]
+    },
+    {
+      "section_name": "Drilling and Charging",
+      "section_description": "Details of drilling and explosive charging process.",
+      "fields": [
+        {
+          "label": "Drill Hole Pattern",
+          "name": "drill_pattern",
+          "type": "Text",
+          "description": "Description of the drill hole pattern used.",
+          "placeholder": "Enter drill pattern",
+          "required": true,
+          "disabled": false,
+          "variant": "Input",
+          "value": "",
+          "checked": true,
+          "rowIndex": 1
+        },
+        {
+          "label": "Number of Drill Holes",
+          "name": "num_holes",
+          "type": "Number",
+          "description": "Total number of drill holes.",
+          "placeholder": "Enter number of holes",
+          "required": true,
+          "disabled": false,
+          "variant": "Input",
+          "value": "",
+          "checked": true,
+          "rowIndex": 1
+        },
+        {
+          "label": "Explosive Type",
+          "name": "explosive_type",
+          "type": "Text",
+          "description": "Type of explosive used.",
+          "placeholder": "Enter explosive type",
+          "required": true,
+          "disabled": false,
+          "variant": "Input",
+          "value": "",
+          "checked": true,
+          "rowIndex": 1
+        },
+        {
+          "label": "Total Explosive Quantity (kg)",
+          "name": "explosive_quantity",
+          "type": "Number",
+          "description": "Total quantity of explosives used (in kg).",
+          "placeholder": "Enter explosive quantity",
+          "required": true,
+          "disabled": false,
+          "variant": "Input",
+          "value": "",
+          "checked": true,
+          "rowIndex": 1
+        }
+      ]
+    },
+    {
+      "section_name": "Safety and Compliance",
+      "section_description": "Safety measures and compliance with regulations.",
+      "fields": [
+        {
+          "label": "Pre-Blasting Inspection",
+          "name": "pre_blast_inspection",
+          "type": "Checkbox",
+          "description": "Confirmation of pre-blasting inspection.",
+          "required": true,
+          "disabled": false,
+          "variant": "Checkbox",
+          "value": "",
+          "checked": false,
+          "rowIndex": 2
+        },
+        {
+          "label": "Personnel Evacuation",
+          "name": "personnel_evacuation",
+          "type": "Checkbox",
+          "description": "Confirmation of personnel evacuation to safe distance.",
+          "required": true,
+          "disabled": false,
+          "variant": "Checkbox",
+          "value": "",
+          "checked": false,
+          "rowIndex": 2
+        },
+        {
+          "label": "Siren/Warning Signals",
+          "name": "warning_signals",
+          "type": "Checkbox",
+          "description": "Use of siren and warning signals before blasting.",
+          "required": true,
+          "disabled": false,
+          "variant": "Checkbox",
+          "value": "",
+          "checked": false,
+          "rowIndex": 2
+        },
+        {
+          "label": "Post-Blasting Inspection",
+          "name": "post_blast_inspection",
+          "type": "Checkbox",
+          "description": "Confirmation of post-blasting inspection.",
+          "required": true,
+          "disabled": false,
+          "variant": "Checkbox",
+          "value": "",
+          "checked": false,
+          "rowIndex": 2
+        }
+      ]
+    }
+  ]
+}

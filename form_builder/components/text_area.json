@@ -1,0 +1,13 @@
+{
+    "checked": true,
+    "description": "You can @mention other users and organizations.",
+    "disabled": false,
+    "label": "Bio",
+    "name": "name_5497488429",
+    "placeholder": "Placeholder",
+    "required": true,
+    "rowIndex": 0,
+    "type": "",
+    "value": "",
+    "variant": "Textarea"
+  }

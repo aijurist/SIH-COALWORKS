@@ -1,0 +1,13 @@
+{
+    "checked": true,
+    "description": "Receive emails about new products, features, and more.",
+    "disabled": false,
+    "label": "Marketing emails",
+    "name": "name_4394773765",
+    "placeholder": "Placeholder",
+    "required": true,
+    "rowIndex": 0,
+    "type": "",
+    "value": "",
+    "variant": "Switch"
+  }

@@ -1,0 +1,13 @@
+{
+    "checked": true,
+    "description": "Select a file to upload.",
+    "disabled": false,
+    "label": "Select File",
+    "name": "name_6724913702",
+    "placeholder": "Placeholder",
+    "required": true,
+    "rowIndex": 0,
+    "type": "",
+    "value": "",
+    "variant": "File Input"
+}

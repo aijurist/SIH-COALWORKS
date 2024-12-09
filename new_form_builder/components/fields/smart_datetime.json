@@ -1,0 +1,13 @@
+{
+    "checked": true,
+    "description": "Please select the full time",
+    "disabled": false,
+    "label": "What's the best time for you?",
+    "name": "name_7408043176",
+    "placeholder": "Placeholder",
+    "required": true,
+    "rowIndex": 0,
+    "type": "",
+    "value": "",
+    "variant": "Smart Datetime Input"
+  }

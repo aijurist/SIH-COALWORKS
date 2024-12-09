@@ -1,0 +1,76 @@
+02-12-2024 20:08:42.88 - INFO - Started validation of input parameters...
+02-12-2024 20:08:42.88 - INFO - Completed validation of input parameters
+02-12-2024 20:08:42.88 - INFO - Started handling of duplicates... Method: "AUTO"
+02-12-2024 20:08:42.89 - DEBUG - 0 missing values found
+02-12-2024 20:08:42.89 - INFO - Completed handling of duplicates in 0.00266 seconds
+02-12-2024 20:08:42.89 - INFO - Started handling of missing values...
+02-12-2024 20:08:42.89 - INFO - Found a total of 8279 missing value(s)
+02-12-2024 20:08:42.89 - INFO - Started handling of NUMERICAL missing values... Method: "AUTO"
+02-12-2024 20:08:42.92 - DEBUG - LINREG imputation of 3 value(s) succeeded for feature "Coal Output (Annual, Mst) 2019"
+02-12-2024 20:08:42.95 - DEBUG - KNN imputation of 694 value(s) succeeded for feature "MSHA IDs"
+02-12-2024 20:08:42.96 - DEBUG - KNN imputation of 701 value(s) succeeded for feature "Coal Output (Annual, Mst) 2023"
+02-12-2024 20:08:42.98 - DEBUG - KNN imputation of 739 value(s) succeeded for feature "Coal Output (Annual, Mst) 2022"
+02-12-2024 20:08:43.00 - DEBUG - KNN imputation of 739 value(s) succeeded for feature "Coal Output (Annual, Mst) 2021"
+02-12-2024 20:08:43.01 - DEBUG - KNN imputation of 740 value(s) succeeded for feature "Coal Output (Annual, Mst) 2020"
+02-12-2024 20:08:43.02 - DEBUG - KNN imputation of 740 value(s) succeeded for feature "Coal Output (Annual, Mst) 2019"
+02-12-2024 20:08:43.02 - INFO - Started handling of CATEGORICAL missing values... Method: "AUTO"
+02-12-2024 20:08:43.10 - DEBUG - KNN imputation of 428 value(s) succeeded for feature "Mine Name AKAs"
+02-12-2024 20:08:43.11 - DEBUG - KNN imputation of 563 value(s) succeeded for feature "Mine Name (Non-ENG)"
+02-12-2024 20:08:43.11 - DEBUG - KNN imputation of 3 value(s) succeeded for feature "Capacity (Mtpa)"
+02-12-2024 20:08:43.13 - DEBUG - KNN imputation of 227 value(s) succeeded for feature "Output Accuracy"
+02-12-2024 20:08:43.13 - DEBUG - KNN imputation of 155 value(s) succeeded for feature "Output Accuracy.1"
+02-12-2024 20:08:43.13 - DEBUG - KNN imputation of 145 value(s) succeeded for feature "Output Accuracy.2"
+02-12-2024 20:08:43.14 - DEBUG - KNN imputation of 158 value(s) succeeded for feature "Output Accuracy.3"
+02-12-2024 20:08:43.14 - DEBUG - KNN imputation of 196 value(s) succeeded for feature "Output Accuracy.4"
+02-12-2024 20:08:43.16 - DEBUG - KNN imputation of 743 value(s) succeeded for feature "Coal Output (Annual, Mst) 2018"
+02-12-2024 20:08:43.16 - DEBUG - KNN imputation of 249 value(s) succeeded for feature "Output Accuracy.5"
+02-12-2024 20:08:43.18 - DEBUG - KNN imputation of 743 value(s) succeeded for feature "Coal Output (Annual, Mst) 2017"
+02-12-2024 20:08:43.19 - DEBUG - KNN imputation of 313 value(s) succeeded for feature "Output Accuracy.6"
+02-12-2024 20:08:43.19 - INFO - Completed handling of missing values in 0.298853 seconds
+02-12-2024 20:08:43.19 - INFO - Started handling of outliers... Method: "WINZ"
+02-12-2024 20:08:43.21 - DEBUG - Outlier imputation of 76 value(s) succeeded for feature "MSHA IDs"
+02-12-2024 20:08:43.23 - DEBUG - Outlier imputation of 69 value(s) succeeded for feature "Coal Output (Annual, Mst) 2023"
+02-12-2024 20:08:43.23 - DEBUG - Outlier imputation of 31 value(s) succeeded for feature "Coal Output (Annual, Mst) 2022"
+02-12-2024 20:08:43.24 - DEBUG - Outlier imputation of 31 value(s) succeeded for feature "Coal Output (Annual, Mst) 2021"
+02-12-2024 20:08:43.25 - DEBUG - Outlier imputation of 30 value(s) succeeded for feature "Coal Output (Annual, Mst) 2020"
+02-12-2024 20:08:43.25 - DEBUG - Outlier imputation of 30 value(s) succeeded for feature "Coal Output (Annual, Mst) 2019"
+02-12-2024 20:08:43.25 - INFO - Completed handling of outliers in 0.063957 seconds
+02-12-2024 20:08:43.25 - INFO - Started conversion of DATETIME features... Granularity: s
+02-12-2024 20:08:43.26 - INFO - Completed conversion of DATETIME features in 0.006 seconds
+02-12-2024 20:08:43.26 - INFO - Started encoding categorical features... Method: "AUTO"
+02-12-2024 20:08:43.26 - DEBUG - Encoding to ONEHOT succeeded for feature "Status"
+02-12-2024 20:08:43.26 - DEBUG - Encoding skipped for feature "Coal Output (Annual, Mt) 2018"
+02-12-2024 20:08:43.26 - DEBUG - Encoding skipped for feature "Mine Name (Non-ENG)"
+02-12-2024 20:08:43.26 - DEBUG - Encoding skipped for feature "Opening Year"
+02-12-2024 20:08:43.26 - DEBUG - Encoding skipped for feature "Coal Output (Annual, Mt) 2020"
+02-12-2024 20:08:43.26 - DEBUG - Encoding to ONEHOT succeeded for feature "ROM or Saleable"
+02-12-2024 20:08:43.26 - DEBUG - Encoding to ONEHOT succeeded for feature "Output Accuracy.4"
+02-12-2024 20:08:43.26 - DEBUG - Encoding skipped for feature "Coal Output (Annual, Mt) 2021"
+02-12-2024 20:08:43.26 - DEBUG - Encoding skipped for feature "Coal Output (Annual, Mst) 2017"
+02-12-2024 20:08:43.26 - DEBUG - Encoding skipped for feature "GEM Mine ID"
+02-12-2024 20:08:43.27 - DEBUG - Encoding skipped for feature "Mine Name"
+02-12-2024 20:08:43.27 - DEBUG - Encoding to ONEHOT succeeded for feature "Output Accuracy"
+02-12-2024 20:08:43.27 - DEBUG - Encoding to ONEHOT succeeded for feature "Output Accuracy.1"
+02-12-2024 20:08:43.27 - DEBUG - Encoding skipped for feature "Mine Name AKAs"
+02-12-2024 20:08:43.27 - DEBUG - Encoding skipped for feature "Coal Output (Annual, Mt) 2019"
+02-12-2024 20:08:43.27 - DEBUG - Encoding skipped for feature "Capacity (Mtpa)"
+02-12-2024 20:08:43.27 - DEBUG - Encoding to ONEHOT succeeded for feature "Output Accuracy.2"
+02-12-2024 20:08:43.27 - DEBUG - Encoding skipped for feature "Coal Output (Annual, Mt) 2022"
+02-12-2024 20:08:43.28 - DEBUG - Encoding to ONEHOT succeeded for feature "Output Accuracy.3"
+02-12-2024 20:08:43.28 - DEBUG - Encoding skipped for feature "Country"
+02-12-2024 20:08:43.28 - DEBUG - Encoding skipped for feature "GEM Wiki Page (ENG)"
+02-12-2024 20:08:43.28 - DEBUG - Encoding skipped for feature "Coal Output (Annual, Mt) 2017"
+02-12-2024 20:08:43.28 - DEBUG - Encoding skipped for feature "Coal Output (Annual, Mt) 2023"
+02-12-2024 20:08:43.28 - DEBUG - Encoding skipped for feature "Coal Output (Annual, Mst) 2018"
+02-12-2024 20:08:43.28 - DEBUG - Encoding to ONEHOT succeeded for feature "Output Accuracy.6"
+02-12-2024 20:08:43.28 - DEBUG - Encoding to ONEHOT succeeded for feature "Output Accuracy.5"
+02-12-2024 20:08:43.28 - INFO - Completed encoding of categorical features in 0.020205 seconds
+02-12-2024 20:08:43.28 - INFO - Started feature type conversion...
+02-12-2024 20:08:43.28 - DEBUG - Conversion to type INT succeeded for feature "MSHA IDs"
+02-12-2024 20:08:43.28 - DEBUG - Conversion to type FLOAT succeeded for feature "Coal Output (Annual, Mst) 2023"
+02-12-2024 20:08:43.28 - DEBUG - Conversion to type FLOAT succeeded for feature "Coal Output (Annual, Mst) 2022"
+02-12-2024 20:08:43.28 - DEBUG - Conversion to type FLOAT succeeded for feature "Coal Output (Annual, Mst) 2021"
+02-12-2024 20:08:43.28 - DEBUG - Conversion to type FLOAT succeeded for feature "Coal Output (Annual, Mst) 2020"
+02-12-2024 20:08:43.28 - DEBUG - Conversion to type FLOAT succeeded for feature "Coal Output (Annual, Mst) 2019"
+02-12-2024 20:08:43.28 - INFO - Completed feature type conversion for 6 feature(s) in 0.003748 seconds
+02-12-2024 20:08:43.28 - INFO - AutoClean process completed in 0.398354 seconds

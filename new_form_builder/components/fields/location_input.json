@@ -1,0 +1,13 @@
+{
+    "checked": true,
+    "description": "If your country has states, it will be appear after selecting country",
+    "disabled": false,
+    "label": "Select Country",
+    "name": "name_8401878195",
+    "placeholder": "Placeholder",
+    "required": true,
+    "rowIndex": 0,
+    "type": "",
+    "value": "",
+    "variant": "Location Input"
+}
