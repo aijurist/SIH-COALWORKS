@@ -18,9 +18,9 @@ def main():
 
     # Test cases for different operational descriptions
     test_queries = [
-        "Coal mine blasting operations, following Indian mining safety standards",
+        # "Coal mine blasting operations, following Indian mining safety standards",
         # "Underground coal extraction process documentation",
-        # "Equipment maintenance and inspection for mining operations",
+        "Equipment maintenance and inspection for mining operations",
         # "Environmental safety and compliance form for coal mining site",
         # "Personnel safety and training documentation for mining workers"
     ]
@@ -32,7 +32,7 @@ def main():
         print(f"{'='*50}")
 
         # Generate the form
-        generated_form = form_generator.generate_form(query)
+        generated_form = form_generator.generate_form(query, form_type="shift_handover_log")
 
         # Save the form to a JSON file if generation is successful
         if generated_form:

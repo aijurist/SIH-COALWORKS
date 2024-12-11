@@ -24,15 +24,11 @@ class CoalMineFormGenerator:
         )
         
         self.knowledge_base = KnowledgeBase(api_key=os.getenv("GOOGLE_API_KEY"))
-        
-        # JSON Output Parser
         self.parser = JsonOutputParser(pydantic_object=FormSchema)
         
         with open('new_form_builder/template/outsourced/explosive.json', 'r') as file:
             self.example = json.load(file)
-            
-        # Generic Prompt Template
-        self.prompt = PromptTemplate(
+        self.prompt_log = PromptTemplate(
             template='''You are an expert form designer specializing in creating comprehensive documentation forms for industrial operations.
 
             Context:
@@ -71,26 +67,43 @@ class CoalMineFormGenerator:
             {format_instruction}
             ''',
             input_variables=["user_description", "knowledge_base_info"],
-            partial_variables={"format_instruction": JsonOutputParser(pydantic_object=FormSchema).get_format_instructions(),
+            partial_variables={"format_instruction": self.parser.get_format_instructions(),
                                "example": self.example}
         )
+        
+        self.prompt_controlPlan = PromptTemplate(
+            template='''You are an expert form designer who specialize in creating feedback forms for control plans. The feedback form is
+            in the sense, the Safety Management Plan information is given and the control plan details are to be generated for a paticular 
+            activity/hazard. So generate a form which can help the supervisor/adminstrator understand the requirements of the control plan.
+            
+            User Query: {user_desc}
+            Knowledge Base Information: {knowledge_base_info}. Use only relevant information from the knowledge base information given.
+            SMP Hazard/Activity Information: {activity_info}. This is the identified Hazard/Activity information and you need to generate form for this.
+            
+            Your goal is to generate a form that allows for precise, comprehensive documentation of the industrial operation, addressing all critical aspects of the process.
+            Here is an example form which you can use to create your forms {example}.
+            Return the output strictly following this JSON schema:
+            {format_instructions}
+            '''
+        ,
+        input_variables=["user_desc", "knowledge_base_info", "activity_info"],
+        partial_variables={"format_instructions": self.parser.get_format_instructions(),
+                           "example": self.example}
+        )
 
-    # Modify the generate_form method to accept a user description
-    def generate_form(self, user_description: str):
+    def generate_form(self, user_description: str, form_type: str):
         """
         Generate a specialized form based on user's operational description
         
-        :param user_description: Detailed description of the industrial operation
-        :return: Generated form schema
+        Parameters:
+        user_description: Detailed description of the industrial operation
+        
+        Returns a form generated for ShadCN using the Formschema class
         """
 
         validity_result = user_query_validator(user_description)
-
-        # If the query is invalid, return the validity result immediately
         if validity_result and not validity_result.get('query_validity', False):
             return validity_result
-
-        # Load the vector store if it hasn't been loaded yet
         if self.knowledge_base.vector_store is None:
             try:
                 print("Loading vector store...")
@@ -99,8 +112,6 @@ class CoalMineFormGenerator:
             except Exception as e:
                 print(f"Error loading vector store: {e}")
                 return None
-
-        # Query the knowledge base for relevant information
         try:
             knowledge_base_info = self.knowledge_base.query_vector_store(user_description)
             formatted_data = "\n".join([f"- {content}" for content, _ in knowledge_base_info])
@@ -112,11 +123,16 @@ class CoalMineFormGenerator:
             print(f"Error querying knowledge base: {e}")
             return None
 
-        # Create the chain
-        chain = self.prompt | self.llm | self.parser
+
+        if form_type not in ['shift_handover_log', 'control_plan']:
+            raise ValueError("Not a valid form type. Options are 'control_plan', 'shift_handover_log'")
+        if form_type == 'shift_handover_log':
+            chain = self.prompt_log | self.llm | self.parser
+        elif form_type == 'control_plan':
+            chain = self.prompt_controlPlan | self.llm | self.parser
+        
 
         try:
-            # Invoke the chain with the user's description and knowledge base information
             result = chain.invoke({
                 "user_description": user_description,
                 "knowledge_base_info": formatted_data
@@ -129,8 +145,9 @@ class CoalMineFormGenerator:
         """
         Save the generated form to a JSON file
         
-        :param form: FormSchema instance or dictionary
-        :param filename: Output filename
+        Parameters:
+        form: FormSchema instance or dictionary
+        filename: Output filename
         """
         if form:
             if isinstance(form, dict):

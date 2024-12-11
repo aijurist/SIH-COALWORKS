@@ -1,6 +1,7 @@
 {
     "form_name": "Explosive Details",
     "form_description": "Form to record explosive charging and blasting details.",
+    "form_number": "1-C",
     "fields": [
       {
         "checked": true,

@@ -1,0 +1,181 @@
+{
+  "form_name": "Environmental Safety and Compliance Form - Coal Mining Site",
+  "form_description": "This form documents environmental safety and compliance aspects of coal mining operations, ensuring adherence to regulations and best practices.",
+  "sections": [
+    {
+      "section_name": "Site Information",
+      "section_description": "Details about the coal mining site.",
+      "fields": [
+        {
+          "label": "Mine Name",
+          "name": "mine_name",
+          "type": "Text",
+          "description": "Official name of the coal mine.",
+          "placeholder": "Enter mine name",
+          "required": true,
+          "value": "",
+          "checked": true,
+          "rowIndex": 0
+        },
+        {
+          "label": "Date",
+          "name": "date",
+          "type": "Date Picker",
+          "description": "Date of form completion/update.",
+          "placeholder": "Select date",
+          "required": true,
+          "value": null,
+          "checked": true,
+          "rowIndex": 0
+        },
+        {
+          "label": "Completed By",
+          "name": "completed_by",
+          "type": "Text",
+          "description": "Name(s) of person(s) completing the form.",
+          "placeholder": "Enter name(s)",
+          "required": true,
+          "value": "",
+          "checked": true,
+          "rowIndex": 0
+        },
+        {
+          "label": "Approved By",
+          "name": "approved_by",
+          "type": "Text",
+          "description": "Name of responsible line manager.",
+          "placeholder": "Enter name",
+          "required": true,
+          "value": "",
+          "checked": true,
+          "rowIndex": 0
+        }
+      ]
+    },
+    {
+      "section_name": "Operational Details",
+      "section_description": "Specifics of the mining operation.",
+      "fields": [
+        {
+          "label": "Mining Method",
+          "name": "mining_method",
+          "type": "Text",
+          "description": "Description of the coal mining method employed.",
+          "placeholder": "Enter mining method",
+          "required": true,
+          "value": "",
+          "checked": true,
+          "rowIndex": 1
+        },
+        {
+          "label": "Coal Type",
+          "name": "coal_type",
+          "type": "Text",
+          "description": "Type of coal being mined.",
+          "placeholder": "Enter coal type",
+          "required": true,
+          "value": "",
+          "checked": true,
+          "rowIndex": 1
+        },
+        {
+          "label": "Production Rate (Tonnes/day)",
+          "name": "production_rate",
+          "type": "Number",
+          "description": "Daily coal production rate.",
+          "placeholder": "Enter production rate",
+          "required": true,
+          "value": null,
+          "checked": true,
+          "rowIndex": 1
+        },
+        {
+          "label": "Equipment List",
+          "name": "equipment_list",
+          "type": "Textarea",
+          "description": "List all major equipment used in the operation.",
+          "placeholder": "Enter equipment list",
+          "required": true,
+          "value": "",
+          "checked": true,
+          "rowIndex": 1
+        }
+      ]
+    },
+    {
+      "section_name": "Environmental Safety & Compliance",
+      "section_description": "Assessment of environmental risks and compliance measures.",
+      "fields": [
+        {
+          "label": "Risk Assessment Conducted",
+          "name": "risk_assessment",
+          "type": "Checkbox",
+          "description": "Has a risk assessment been performed?",
+          "required": true,
+          "value": null,
+          "checked": false,
+          "rowIndex": 2
+        },
+        {
+          "label": "Ventilation System",
+          "name": "ventilation",
+          "type": "Select",
+          "description": "Status of the ventilation system.",
+          "placeholder": "Select status",
+          "required": true,
+          "value": null,
+          "checked": true,
+          "options": [
+            {
+              "label": "Adequate",
+              "value": "adequate"
+            },
+            {
+              "label": "Inadequate",
+              "value": "inadequate"
+            },
+            {
+              "label": "Under Maintenance",
+              "value": "maintenance"
+            }
+          ],
+          "rowIndex": 2
+        },
+        {
+          "label": "Dust Control Measures",
+          "name": "dust_control",
+          "type": "Multi Select",
+          "description": "Implemented dust control measures.",
+          "options": [
+            {
+              "label": "Water Sprays",
+              "value": "water_sprays"
+            },
+            {
+              "label": "Ventilation",
+              "value": "ventilation"
+            },
+            {
+              "label": "Dust Extraction",
+              "value": "dust_extraction"
+            }
+          ],
+          "required": true,
+          "value": [],
+          "checked": true,
+          "rowIndex": 2
+        },
+        {
+          "label": "Water Management Plan",
+          "name": "water_management",
+          "type": "File Input",
+          "description": "Upload the water management plan document.",
+          "required": true,
+          "value": null,
+          "checked": true,
+          "rowIndex": 2
+        }
+      ]
+    }
+  ]
+}

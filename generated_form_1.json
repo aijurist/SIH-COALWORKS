@@ -1,184 +1,221 @@
 {
-  "form_name": "Coal Mine Blasting Operation Record",
-  "form_description": "Comprehensive documentation of coal mine blasting operations, adhering to Indian mining safety standards.",
+  "form_name": "Mining Equipment Maintenance & Inspection Form",
+  "form_description": "Comprehensive documentation of maintenance and inspection procedures for mining equipment, ensuring operational safety and regulatory compliance.",
+  "form_number": "FORM-1A",
   "sections": [
     {
-      "section_name": "General Information",
-      "section_description": "Basic details about the blasting operation.",
+      "section_name": "Equipment Information",
+      "section_description": "Details about the equipment being maintained/inspected.",
       "fields": [
         {
-          "label": "Mine Name",
-          "name": "mine_name",
+          "label": "Equipment ID",
+          "name": "equipment_id",
           "type": "Text",
-          "description": "Name of the coal mine.",
-          "placeholder": "Enter mine name",
+          "description": "Unique identifier for the equipment.",
+          "placeholder": "Enter Equipment ID",
           "required": true,
-          "disabled": false,
           "variant": "Input",
           "value": "",
           "checked": true,
-          "rowIndex": 0
+          "options": null
         },
+        {
+          "label": "Equipment Type",
+          "name": "equipment_type",
+          "type": "Text",
+          "description": "Type of equipment (e.g., Dozer, Excavator).",
+          "placeholder": "Enter Equipment Type",
+          "required": true,
+          "variant": "Combobox",
+          "value": "",
+          "checked": true,
+          "options": null
+        },
+        {
+          "label": "Manufacturer",
+          "name": "manufacturer",
+          "type": "Text",
+          "description": "Name of the equipment manufacturer.",
+          "placeholder": "Enter Manufacturer",
+          "required": true,
+          "variant": "Input",
+          "value": "",
+          "checked": true,
+          "options": null
+        },
+        {
+          "label": "Model Number",
+          "name": "model_number",
+          "type": "Text",
+          "description": "Model number of the equipment.",
+          "placeholder": "Enter Model Number",
+          "required": true,
+          "variant": "Input",
+          "value": "",
+          "checked": true,
+          "options": null
+        }
+      ]
+    },
+    {
+      "section_name": "Maintenance/Inspection Details",
+      "section_description": "Information about the specific maintenance or inspection being performed.",
+      "fields": [
         {
           "label": "Date",
           "name": "date",
           "type": "Date Picker",
-          "description": "Date of the blasting operation.",
-          "placeholder": "Select date",
+          "description": "Date of maintenance/inspection.",
+          "placeholder": "Select Date",
           "required": true,
-          "disabled": false,
           "variant": "Date Picker",
           "value": "",
           "checked": true,
-          "rowIndex": 0
+          "options": null
         },
         {
-          "label": "Shift",
-          "name": "shift",
+          "label": "Time",
+          "name": "time",
+          "type": "Datetime Picker",
+          "description": "Time of maintenance/inspection.",
+          "placeholder": "Select Time",
+          "required": true,
+          "variant": "Datetime Picker",
+          "value": "",
+          "checked": true,
+          "options": null
+        },
+        {
+          "label": "Maintenance Type",
+          "name": "maintenance_type",
           "type": "Select",
-          "description": "Shift during which the blasting occurred.",
-          "placeholder": "Select shift",
+          "description": "Type of maintenance (e.g., Routine, Corrective).",
+          "placeholder": "Select Type",
           "required": true,
-          "disabled": false,
-          "variant": "Combobox",
+          "variant": "Select",
           "value": "",
           "checked": true,
-          "rowIndex": 0,
-          "options": [
-            {
-              "label": "Day",
-              "value": "day"
-            },
-            {
-              "label": "Night",
-              "value": "night"
-            }
-          ]
+          "options": null
         },
         {
-          "label": "Area/Location",
-          "name": "area",
-          "type": "Text",
-          "description": "Specific area within the mine.",
-          "placeholder": "Enter area/location",
+          "label": "Inspection Checklist",
+          "name": "inspection_checklist",
+          "type": "Multi Select",
+          "description": "Items inspected (refer to standard checklist).",
+          "placeholder": "Select Items",
           "required": true,
-          "disabled": false,
-          "variant": "Input",
+          "variant": "Multi Select",
           "value": "",
           "checked": true,
-          "rowIndex": 0
+          "options": null
         }
       ]
     },
     {
-      "section_name": "Drilling and Charging",
-      "section_description": "Details of drilling and explosive charging process.",
+      "section_name": "Safety & Hazard Assessment",
+      "section_description": "Evaluation of potential hazards and safety measures.",
       "fields": [
         {
-          "label": "Drill Hole Pattern",
-          "name": "drill_pattern",
-          "type": "Text",
-          "description": "Description of the drill hole pattern used.",
-          "placeholder": "Enter drill pattern",
+          "label": "Operational Status",
+          "name": "operational_status",
+          "type": "Select",
+          "description": "Current operational status (Normal, Shutdown, Abnormal).",
+          "placeholder": "Select Status",
           "required": true,
-          "disabled": false,
-          "variant": "Input",
+          "variant": "Select",
           "value": "",
           "checked": true,
-          "rowIndex": 1
+          "options": null
         },
         {
-          "label": "Number of Drill Holes",
-          "name": "num_holes",
-          "type": "Number",
-          "description": "Total number of drill holes.",
-          "placeholder": "Enter number of holes",
+          "label": "Potential Hazards",
+          "name": "potential_hazards",
+          "type": "Textarea",
+          "description": "Describe potential hazards associated with the maintenance.",
+          "placeholder": "Enter Hazards",
           "required": true,
-          "disabled": false,
-          "variant": "Input",
+          "variant": "Textarea",
           "value": "",
           "checked": true,
-          "rowIndex": 1
+          "options": null
         },
         {
-          "label": "Explosive Type",
-          "name": "explosive_type",
-          "type": "Text",
-          "description": "Type of explosive used.",
-          "placeholder": "Enter explosive type",
+          "label": "Mitigation Measures",
+          "name": "mitigation_measures",
+          "type": "Textarea",
+          "description": "Describe the mitigation measures implemented.",
+          "placeholder": "Enter Measures",
           "required": true,
-          "disabled": false,
-          "variant": "Input",
+          "variant": "Textarea",
           "value": "",
           "checked": true,
-          "rowIndex": 1
+          "options": null
         },
         {
-          "label": "Total Explosive Quantity (kg)",
-          "name": "explosive_quantity",
-          "type": "Number",
-          "description": "Total quantity of explosives used (in kg).",
-          "placeholder": "Enter explosive quantity",
+          "label": "Safety Equipment Used",
+          "name": "safety_equipment",
+          "type": "Multi Select",
+          "description": "List safety equipment used during the activity.",
+          "placeholder": "Select Equipment",
           "required": true,
-          "disabled": false,
-          "variant": "Input",
+          "variant": "Multi Select",
           "value": "",
           "checked": true,
-          "rowIndex": 1
+          "options": null
         }
       ]
     },
     {
-      "section_name": "Safety and Compliance",
-      "section_description": "Safety measures and compliance with regulations.",
+      "section_name": "Personnel & Sign-off",
+      "section_description": "Information about personnel involved and authorization.",
       "fields": [
         {
-          "label": "Pre-Blasting Inspection",
-          "name": "pre_blast_inspection",
-          "type": "Checkbox",
-          "description": "Confirmation of pre-blasting inspection.",
+          "label": "Technician Name",
+          "name": "technician_name",
+          "type": "Text",
+          "description": "Name of the technician performing the maintenance.",
+          "placeholder": "Enter Name",
           "required": true,
-          "disabled": false,
-          "variant": "Checkbox",
+          "variant": "Input",
           "value": "",
-          "checked": false,
-          "rowIndex": 2
+          "checked": true,
+          "options": null
         },
         {
-          "label": "Personnel Evacuation",
-          "name": "personnel_evacuation",
-          "type": "Checkbox",
-          "description": "Confirmation of personnel evacuation to safe distance.",
+          "label": "Supervisor Name",
+          "name": "supervisor_name",
+          "type": "Text",
+          "description": "Name of the supervising personnel.",
+          "placeholder": "Enter Name",
           "required": true,
-          "disabled": false,
-          "variant": "Checkbox",
+          "variant": "Input",
           "value": "",
-          "checked": false,
-          "rowIndex": 2
+          "checked": true,
+          "options": null
         },
         {
-          "label": "Siren/Warning Signals",
-          "name": "warning_signals",
-          "type": "Checkbox",
-          "description": "Use of siren and warning signals before blasting.",
+          "label": "Technician Signature",
+          "name": "technician_signature",
+          "type": "Signature Input",
+          "description": "Technician's signature.",
+          "placeholder": "Sign Here",
           "required": true,
-          "disabled": false,
-          "variant": "Checkbox",
+          "variant": "Signature Input",
           "value": "",
-          "checked": false,
-          "rowIndex": 2
+          "checked": true,
+          "options": null
         },
         {
-          "label": "Post-Blasting Inspection",
-          "name": "post_blast_inspection",
-          "type": "Checkbox",
-          "description": "Confirmation of post-blasting inspection.",
+          "label": "Supervisor Signature",
+          "name": "supervisor_signature",
+          "type": "Signature Input",
+          "description": "Supervisor's signature.",
+          "placeholder": "Sign Here",
           "required": true,
-          "disabled": false,
-          "variant": "Checkbox",
+          "variant": "Signature Input",
           "value": "",
-          "checked": false,
-          "rowIndex": 2
+          "checked": true,
+          "options": null
         }
       ]
     }

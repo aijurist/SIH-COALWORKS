@@ -4,7 +4,7 @@ from langchain_core.pydantic_v1 import Field, BaseModel
 
 class MitigationStep(BaseModel):
     description: str = Field(description="Detailed description of the additional control measures.")
-    responsible_party: str = Field(description="The party responsible for implementing this mitigation step.")
+    responsible_party: str = Field(description="The party responsible for implementing this mitigation step.", max_length=1)
     priority: str = Field(description="The priority level of the mitigation step (e.g., 'High', 'Medium', 'Low').")
 
 

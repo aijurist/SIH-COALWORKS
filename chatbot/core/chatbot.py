@@ -131,7 +131,7 @@ class Router(BaseModel):
     )
 
 
-llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash-latest", google_api_key=GOOGLE_API_KEY)
+llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash-latest", google_api_key=GOOGLE_API_KEY).bind_tools(classify_query, plotter, query_chatbot)
 # llm = llm.bind_tools([classify_query])
 
 

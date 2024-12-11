@@ -1,0 +1,140 @@
+{
+  "form_name": "Mining Worker Personnel Safety and Training Record",
+  "form_description": "This form documents the safety training and qualifications of mining workers, ensuring compliance with relevant regulations and company standards.",
+  "sections": [
+    {
+      "section_name": "Worker Information",
+      "section_description": "Personal details of the mining worker.",
+      "fields": [
+        {
+          "label": "Worker ID",
+          "name": "worker_id",
+          "type": "Text",
+          "description": "Unique identification number for the worker.",
+          "placeholder": "Enter worker ID",
+          "required": true,
+          "disabled": false,
+          "variant": "Input",
+          "value": "",
+          "checked": true,
+          "rowIndex": 0
+        },
+        {
+          "label": "Full Name",
+          "name": "full_name",
+          "type": "Text",
+          "description": "Worker's full name.",
+          "placeholder": "Enter full name",
+          "required": true,
+          "disabled": false,
+          "variant": "Input",
+          "value": "",
+          "checked": true,
+          "rowIndex": 0
+        },
+        {
+          "label": "Job Title",
+          "name": "job_title",
+          "type": "Text",
+          "description": "Worker's current job title.",
+          "placeholder": "Enter job title",
+          "required": true,
+          "disabled": false,
+          "variant": "Input",
+          "value": "",
+          "checked": true,
+          "rowIndex": 0
+        },
+        {
+          "label": "Date of Birth",
+          "name": "date_of_birth",
+          "type": "Date Picker",
+          "description": "Worker's date of birth.",
+          "placeholder": "Select date of birth",
+          "required": true,
+          "disabled": false,
+          "variant": "Date Picker",
+          "value": "",
+          "checked": true,
+          "rowIndex": 0
+        }
+      ]
+    },
+    {
+      "section_name": "Training Records",
+      "section_description": "Details of completed safety training courses.",
+      "fields": [
+        {
+          "label": "Training Course",
+          "name": "training_course",
+          "type": "Select",
+          "description": "Name of the completed training course.",
+          "placeholder": "Select course",
+          "required": true,
+          "disabled": false,
+          "variant": "Combobox",
+          "value": "",
+          "checked": true,
+          "rowIndex": 1,
+          "options": [
+            {
+              "label": "General Mine Safety",
+              "value": "general_mine_safety"
+            },
+            {
+              "label": "Emergency Response",
+              "value": "emergency_response"
+            },
+            {
+              "label": "Hazardous Materials Handling",
+              "value": "hazmat_handling"
+            },
+            {
+              "label": "Risk Assessment",
+              "value": "risk_assessment"
+            }
+          ]
+        },
+        {
+          "label": "Date of Completion",
+          "name": "completion_date",
+          "type": "Date Picker",
+          "description": "Date the training was completed.",
+          "placeholder": "Select completion date",
+          "required": true,
+          "disabled": false,
+          "variant": "Date Picker",
+          "value": "",
+          "checked": true,
+          "rowIndex": 1
+        },
+        {
+          "label": "Certification Number",
+          "name": "certification_number",
+          "type": "Text",
+          "description": "Certification number or ID for the training.",
+          "placeholder": "Enter certification number",
+          "required": false,
+          "disabled": false,
+          "variant": "Input",
+          "value": "",
+          "checked": true,
+          "rowIndex": 1
+        },
+        {
+          "label": "Expiry Date",
+          "name": "expiry_date",
+          "type": "Date Picker",
+          "description": "Expiry date of the training certification (if applicable).",
+          "placeholder": "Select expiry date",
+          "required": false,
+          "disabled": false,
+          "variant": "Date Picker",
+          "value": "",
+          "checked": true,
+          "rowIndex": 1
+        }
+      ]
+    }
+  ]
+}

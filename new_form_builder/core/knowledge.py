@@ -165,12 +165,10 @@ class KnowledgeBase:
                 
                 text_chunks = self._split_text(text)
                 all_text_chunks.extend(text_chunks)
-
-                # Extract tables and convert to text
                 table, table_metadata = self._extract_table_from_pdf(doc)
                 
                 if not table.empty:
-                    table_text = table.to_string(index=False)  # Convert DataFrame to string
+                    table_text = table.to_string(index=False) 
                     all_text_chunks.append((table_text, vars(table_metadata)))
 
             elif document_type.lower() == 'txt':

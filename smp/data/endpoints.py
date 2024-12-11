@@ -9,11 +9,31 @@
 # }
 
 endpoints = {
-    "get_user": "https://jsonplaceholder.typicode.com/users/1",
-    "get_data": "https://jsonplaceholder.typicode.com/posts",   
-    "get_smp": "https://jsonplaceholder.typicode.com/todos/1", 
-    "get_iot_data": "https://jsonplaceholder.typicode.com/comments",
-    "get_minutes_of_meetings": "https://jsonplaceholder.typicode.com/albums",
-    "get_compliance": "https://jsonplaceholder.typicode.com/photos",
-    "get_geographical_features": "https://jsonplaceholder.typicode.com/posts/1"
+    "get_asset": "http://192.168.173.53:3000/api/v1/asset",
+    "get_asset_type": "http://192.168.173.53:3000/api/v1/assettype",   
+    "get_position": "http://192.168.173.53:3000/api/v1/position", 
+    "get_round": "http://192.168.173.53:3000/api/v1/rounds",
+    "get_mine_info": "http://192.168.173.53:3000/api/v1/mine",
+    "get_shift_info": "http://192.168.173.53:3000/api/v1/shift",
+    "get_user_info": "http://192.168.173.53:3000/api/v1/user",
+    "get_smp_info": "http://192.168.173.53:3000/api/v1/smp"
+}
+
+endpoints = {
+    "get_asset": "http://192.168.173.53:3000/api/v1/asset",
+    "get_asset_type": "http://192.168.173.53:3000/api/v1/assettype",   
+    "get_position": "http://192.168.173.53:3000/api/v1/position", 
+    "get_round": "http://192.168.173.53:3000/api/v1/rounds",
+    "get_mine_info": "http://192.168.173.53:3000/api/v1/mine",
+    "get_shift_info": "http://192.168.137.88:3000/api/v1/shift",
+    "get_user_info": "http://192.168.137.88:3000/api/v1/user",
+    "get_smp_info": "http://192.168.137.88:3000/api/v1/smp",
+    # "get_iot_info": "http://192.168.137.88:3000/api/v1/iot"
+}
+
+mapping = {
+    "get_shift_info": "shift",
+    "get_user_info": "user",
+    "get_smp_info": "smp",
+    # "get_iot_info": "iot"
 }

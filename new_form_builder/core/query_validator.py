@@ -10,6 +10,12 @@ load_dotenv()
 
 # Define the output schema
 class QueryModel(BaseModel):
+    """
+    Structure for json output given by the model
+
+    Args:
+        BaseModel (_type_): imported from pydantic containing  baseModel functionality for structuing the output
+    """
     query_validity: bool = Field(description="Validity of the query asked. True is Valid, False is Invalid.")
     reason: str = Field(description="Explanation of why the query is valid or invalid.")
 

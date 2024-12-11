@@ -10,7 +10,8 @@ from langchain_core.output_parsers import JsonOutputParser
 # Vector DB and SMP imports
 from smp.core.schema import SMPModel
 from smp.data.vector_store import KnowledgeBase
-
+from smp.components.config import EXPOSURE_SCALE, CONSEQUENCE_SCALE, PROBABILITY_SCALE
+from smp.utils.data_req import rtd_analyser
 # Load environment variables
 load_dotenv()
 
@@ -25,7 +26,6 @@ class HazardAnalysisChain:
         )
         
         self.knowledge_base = KnowledgeBase(api_key=google_api_key)
-        
         self.prompt = PromptTemplate(
             template='''Context Information:
 
@@ -35,7 +35,7 @@ class HazardAnalysisChain:
             The user has given you additional information: {input_info}. Use this information if it is clear and relevant to the analysis. 
             
             Knowledge Base Information: {knowledge_base_info}. Use only relevant information from the knowledge base information given.
-
+            Real time data information in concise version: {iot_data}, {shift_data}, {user_data}, {smp_data}
             Follow these instructions for the hazard analysis:
             
             1. Incorporate insights from the context information and input provided.
@@ -52,7 +52,7 @@ class HazardAnalysisChain:
             Return the output as JSON in the following format:
             {format_instruction}
             ''',
-            input_variables=["activity_name", "knowledge_base_info", "input_info"],
+            input_variables=["activity_name", "knowledge_base_info", "input_info", "iot_data", "shift_data", "user_data", "smp_data"],
             partial_variables={"format_instruction": self.parser.get_format_instructions()},
         )
 
@@ -75,8 +75,7 @@ class HazardAnalysisChain:
             except Exception as e:
                 print(f"Error loading vector store: {e}")
                 return None
-
-        # Query the knowledge base for relevant information
+                                                      
         try:
             knowledge_base_info = self.knowledge_base.query_vector_store(activity_name)
             formatted_data = "\n".join([f"- {content}" for content, _ in knowledge_base_info])
@@ -88,12 +87,18 @@ class HazardAnalysisChain:
             print(f"Error querying knowledge base: {e}")
             return None
 
-        
+        rtd_data = rtd_analyser(activity_name)
         result = self.chain.invoke({
             "activity_name": activity_name,
             "knowledge_base_info": formatted_data,
-            "input_info": input_info
+            "input_info": input_info,
+            "iot_data":{},
+            "shift_data": rtd_data["shift"],
+            "user_data":rtd_data["user"],
+            "smp_data": rtd_data["smp"],
+            
         })
         
         return result
-
+            
+            

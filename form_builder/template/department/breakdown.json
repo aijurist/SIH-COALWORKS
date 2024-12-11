@@ -1,6 +1,7 @@
 {
     "form_name": "Breakdown Report",
     "form_description": "Form to record equipment breakdown details and downtime for various mining machinery.",
+    "form_number": "1-B",
     "fields": [
       {
         "checked": true,

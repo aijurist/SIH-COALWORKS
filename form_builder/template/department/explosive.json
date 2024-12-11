@@ -1,6 +1,7 @@
 {
     "form_name": "Explosive Form",
     "form_description": "Form to record explosive charging and blasting details for mining operations.",
+    "form_number": "1-B",
     "fields": [
       {
         "checked": true,
