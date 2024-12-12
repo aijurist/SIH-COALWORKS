@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT Data Chart</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <h1>IoT Data Chart Visualization</h1>
+    <div id="chart"></div>
+    <button onclick="generateChart()">Generate Chart</button>
+    <script>
+        function generateChart() {
+            fetch('/generate_chart', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ query: "Create a bar chart for the data" })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    Plotly.newPlot('chart', JSON.parse(data.figure).data, JSON.parse(data.figure).layout);
+                } else {
+                    alert(data.message || 'An error occurred');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

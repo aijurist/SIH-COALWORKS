@@ -28,11 +28,11 @@ def data_requester(endpoint_url, headers=None):
     
 def rtd_analyser(query):
         combined_data = {}
-        
+        host_url = "http://192.168.137.53:3000"
         for key, value in mapping.items():
             endpoint_url = endpoints[key]
             query = queries[value] + f'. Do not use markdown language or style the text. The user has asked for activity/queried: {query}. Extract only relevant information'
-            print(f"endpoint_url: {endpoint_url}, query: {query}")
+            print(f"endpoint_url: {host_url + endpoint_url}, query: {query}")
             
             data = data_requester(endpoint_url=endpoint_url)
             res = query_json(query=query, data=data)

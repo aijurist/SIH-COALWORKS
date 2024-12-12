@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 from new_form_builder.core.query_validator import user_query_validator
 from new_form_builder.core.schema import FormSchema
 from new_form_builder.core.knowledge import KnowledgeBase
+from new_form_builder.utils.helper import data_requester, query_json
 
 load_dotenv()
 
@@ -29,39 +30,59 @@ class CoalMineFormGenerator:
         with open('new_form_builder/template/outsourced/explosive.json', 'r') as file:
             self.example = json.load(file)
         self.prompt_log = PromptTemplate(
-            template='''You are an expert form designer specializing in creating comprehensive documentation forms for industrial operations.
+            template='''You are an expert form designer specializing in creating comprehensive safety and operational control plan forms for coal mining operations. 
 
-            Context:
-            - You will design a specialized form for a specific industrial operation
-            - The form must be tailored to capture all critical aspects of the operation
+                Objective: Design an intricate, multi-section digital form that provides a thorough assessment of safety, operational readiness, environmental considerations, and risk management for coal mining activities.
 
-            User Query: {user_description}
-            
-            Knowledge Base Information: {knowledge_base_info}. Use only relevant information from the knowledge base information given.
+                Context Details:
+                - User Operational Description: {user_description}
+                - Existing Safety Management Information: {knowledge_base_info}
+                - Specific Activity/Hazard Information: {activity_info}
 
-            Task:
-            Design a comprehensive, detailed form that thoroughly documents the specific industrial operation. The form should:
-            1. Capture all critical technical, safety, and operational details
-            2. Ensure compliance with relevant industry and regulatory standards
-            3. Include fields that provide exhaustive documentation of the operation
-            4. Consider operational requirements, safety protocols, and detailed process tracking
+                Form Design Requirements:
+                Comprehensive Safety Assessment Sections:
+                - Pre-Shift Safety Inspection Checklist
+                - Personal Protective Equipment (PPE) Verification
+                - Equipment Operational Readiness
+                - Emergency Response Preparedness
+                - Environmental Monitoring
+                - Specific Hazard Mitigation Protocols
 
-            Design Guidance:
-            - Carefully analyze the operation described in the user query
-            - Identify and create fields that comprehensively cover:
-            * Technical specifications
-            * Safety protocols
-            * Personnel involvement
-            * Equipment details
-            * Regulatory compliance requirements
-            * Risk assessment and mitigation
-            - Ensure the form provides a complete, multi-dimensional view of the operation
-            - Create fields that capture both quantitative and qualitative information
-            - Make the form adaptable and thorough
-            - Make the form user friendly and try to use variants such as Checkbox, Select, Multi Select, etc
 
-            Your goal is to generate a form that allows for precise, comprehensive documentation of the industrial operation, addressing all critical aspects of the process.
-            Here is an example form which you can use to create your forms {example}
+                3. Key Assessment Areas:
+                a) Geological Stability Assessment
+                    - Ground support status
+                    - Roof and wall integrity
+                    - Potential rock burst risks
+                    - Ventilation shaft stability
+
+                b) Equipment and Machinery Inspection
+                    - Mechanical condition checks
+                    - Electrical system integrity
+                    - Hydraulic and pneumatic system assessment
+                    - Wear and tear evaluation
+                    - Calibration and maintenance records
+
+                c) Safety Systems Verification
+                    - Gas detection system functionality
+                    - Fire suppression system readiness
+                    - Communication equipment status
+                    - Emergency escape route assessment
+
+
+                d) Risk Management
+                    - Identified potential hazards
+                    - Mitigation strategy effectiveness
+                    - Incident prevention measures
+                    - Real-time risk scoring mechanism
+
+                5. Submission Requirements:
+                - Mandatory field completion
+                - Timestamps for each section
+                - Automatic data validation
+                - Cross-referencing with historical safety data
+
+                Generate a highly structured, comprehensive digital form that transforms safety management from a checklist to a sophisticated risk assessment and prevention tool.
 
             Return the output strictly following this JSON schema:
             {format_instruction}
@@ -72,31 +93,38 @@ class CoalMineFormGenerator:
         )
         
         self.prompt_controlPlan = PromptTemplate(
-            template='''You are an expert form designer who specialize in creating feedback forms for control plans. The feedback form is
-            in the sense, the Safety Management Plan information is given and the control plan details are to be generated for a paticular 
-            activity/hazard. So generate a form which can help the supervisor/adminstrator understand the requirements of the control plan.
-            
-            User Query: {user_desc}
-            Knowledge Base Information: {knowledge_base_info}. Use only relevant information from the knowledge base information given.
-            SMP Hazard/Activity Information: {activity_info}. This is the identified Hazard/Activity information and you need to generate form for this.
-            
-            Your goal is to generate a form that allows for precise, comprehensive documentation of the industrial operation, addressing all critical aspects of the process.
-            Here is an example form which you can use to create your forms {example}.
-            Return the output strictly following this JSON schema:
-            {format_instructions}
-            '''
+            template='''You are a form design expert specializing in creating detailed safety and operational assessment forms for coal mining operations.
+
+                Objective:
+                Create a multi-section digital form to evaluate safety, operational readiness, environmental impact, and risk management in coal mining activities.
+
+                Context:
+                - User Description: {user_description}
+                - Existing Safety Information: {knowledge_base_info}
+                - Activity or Hazard Details: {activity_info}
+
+                Sample example form: {example}
+                Form Design Requirements:
+                Include sections for:
+                1. Pre-Shift Safety Inspection
+                2. PPE (Personal Protective Equipment) Verification
+                3. Equipment Readiness
+                4. Emergency Response Preparedness
+                5. Environmental Monitoring
+                6. Specific Hazard Mitigation Protocols. {format_instructions}'''
         ,
-        input_variables=["user_desc", "knowledge_base_info", "activity_info"],
+        input_variables=["user_description", "knowledge_base_info", "activity_info"],
         partial_variables={"format_instructions": self.parser.get_format_instructions(),
                            "example": self.example}
         )
 
-    def generate_form(self, user_description: str, form_type: str):
+    def generate_form(self, user_description: str, form_type: str, activity_info: str = None):
         """
         Generate a specialized form based on user's operational description
         
         Parameters:
         user_description: Detailed description of the industrial operation
+        form_type: type of form. Values can either be 'shift_handover_log' or 'control_plan'
         
         Returns a form generated for ShadCN using the Formschema class
         """
@@ -104,6 +132,8 @@ class CoalMineFormGenerator:
         validity_result = user_query_validator(user_description)
         if validity_result and not validity_result.get('query_validity', False):
             return validity_result
+        
+        shift_data = data_requester("http://192.168.173.223:3000/api/v1/shift")
         if self.knowledge_base.vector_store is None:
             try:
                 print("Loading vector store...")
@@ -115,6 +145,7 @@ class CoalMineFormGenerator:
         try:
             knowledge_base_info = self.knowledge_base.query_vector_store(user_description)
             formatted_data = "\n".join([f"- {content}" for content, _ in knowledge_base_info])
+            formatted_data = formatted_data + json.dumps(shift_data)
             print(formatted_data)
         except ValueError as ve:
             print(f"ValueError: {ve}")
@@ -133,13 +164,21 @@ class CoalMineFormGenerator:
         
 
         try:
-            result = chain.invoke({
-                "user_description": user_description,
-                "knowledge_base_info": formatted_data
-            })
-            return result
+            if form_type == 'shift_handover_log':
+                result = chain.invoke({
+                    "user_description": user_description,
+                    "knowledge_base_info": formatted_data
+                })
+                return result
+            else:
+                result = chain.invoke({
+                    "user_description": user_description,
+                    "knowledge_base_info": formatted_data,
+                    "activity_info": activity_info
+                })
+                return result
         except Exception as e:
-            print(f"Error generating form for operation: {e}")
+            raise ValueError(f"Error generating form for operation: {e}")
             return None
     def save_form_to_json(self, form: Union[Dict, FormSchema], filename: str):
         """

@@ -1,198 +1,132 @@
-from typing import Annotated, Literal, Union
-from langchain_core.tools import tool
-from langgraph.graph import MessagesState, StateGraph, START, END
-from typing_extensions import TypedDict
-from langchain_google_genai import ChatGoogleGenerativeAI
 import os
-from dotenv import load_dotenv
-import plotly
-from langchain_core.messages import HumanMessage
-from langgraph.prebuilt import create_react_agent
-from pydantic import BaseModel, Field
-from typing import Literal
-# Load Google API Key
-load_dotenv()
-GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
-print(GOOGLE_API_KEY)
+from typing import List, Dict, Optional
+from dataclasses import dataclass, field
+from datetime import datetime
 
-# Import custom components
-from chatbot.components.visualization.graph_plotter import chat2plot
+# Knowledge Base and LLM imports
+from chatbot.db.knowledge_base import KnowledgeBase
+from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain.prompts import PromptTemplate
+from langchain.memory import ConversationBufferMemory
+from langchain.schema import BaseMemory
 
-class AgentState(MessagesState):
-    # State for the current worker
-    next: str
+@dataclass
+class ChatMessage:
+    """Represents a single chat message with metadata."""
+    role: str  # 'human' or 'ai'
+    content: str
+    timestamp: datetime = field(default_factory=datetime.now)
 
-##### Defining all tools for agents
-@tool
-def plotter(
-    df: Annotated[str, "The dataframe for which the graph should be plotted"],
-    query: Annotated[str, "The user query for which the graph should be plotted"],
-) -> Union[str, "plotly.graph_objs.Figure"]:
+class KnowledgeBaseChatbot:
     """
-    Plot the graph given a dataframe and user query.
-    Returns a tuple of (output string, plotly figure object).
-    """
-    output_str = ""
-    try:
-        plotter_instance = chat2plot(df)
-        result = plotter_instance(query, show_plot=False) 
-        if result.config:
-            output_str += "Chart Configuration:\n"
-            output_str += str(result.config) + "\n\n"
-        else:
-            output_str += "No valid configuration returned.\n\n"
-
-        if result.explanation:
-            output_str += "Explanation from LLM:\n"
-            output_str += result.explanation + "\n"
-
-        # Check if a figure is generated
-        if result.figure:
-            return {
-                "output": output_str.strip(),
-                "figure": result.figure,
-            }
-        else:
-            return {
-                "output": output_str.strip() + "\nNo chart could be generated.",
-                "figure": None,
-            }
-
-    except Exception as e:
-        return {
-            "output": f"An error occurred while plotting the graph: {str(e)}",
-            "figure": None,
-        }
-
-## Classifier query tool
-@tool
-def classify_query(
-    query: Annotated[str, "The user's query to be classified"]
-) -> str:
-    """
-    Classify the user's query to determine the appropriate agent.
-    Returns 'plotter' if visualization is needed, 'helper' for textual information.
-    """
-    visualization_keywords = [
-        'show', 'plot', 'graph', 'chart', 'visualize', 'represent', 'diagram', 
-        'trend', 'distribution', 'comparison', 'visual representation'
-    ]
+    A chatbot that integrates a knowledge base and maintains chat history.
     
-    query_lower = query.lower()
-    
-    if any(keyword in query_lower for keyword in visualization_keywords):
-        return "plotter"
-    else:
-        return "helper"
-
-### Chatbot Tool
-from chatbot.components.general_chatbot.chatbot import CoalMineChatbot
-import json
-@tool
-def query_chatbot(
-    user_query: Annotated[str, "The user's question about coal mining in India"]
-) -> str:
-    """ Use this to get information about the current shifts, datas related to the coal mines and 
-    generalized information of the coal mines across india. And any data related to coal mines from the knowledge base 
+    Attributes:
+        knowledge_base (KnowledgeBase): Vector store for semantic search
+        llm (ChatGoogleGenerativeAI): Language model for generating responses
+        chat_history (List[ChatMessage]): Conversation history
+        memory (ConversationBufferMemory): LangChain memory for tracking conversation context
     """
-    try:
-        chatbot = CoalMineChatbot(api_key=GOOGLE_API_KEY)
-        response = chatbot.query(user_query)
-        result = {
-            "user_query": user_query,
-            "chatbot_response": response
-        }
+    
+    def __init__(self, 
+                 api_key: str = None, 
+                 knowledge_base_path: str = "data/vector_db/faiss_index",
+                 model: str = "gemini-1.5-pro"):
+        """
+        Initialize the chatbot with knowledge base and language model.
         
-        return json.dumps(result)
+        :param api_key: Google API key (optional, can be loaded from environment)
+        :param knowledge_base_path: Path to the FAISS vector store
+        :param model: Gemini model to use for chat
+        """
+        self.api_key = api_key or os.getenv("GOOGLE_API_KEY")
+        if not self.api_key:
+            raise ValueError("Google API Key must be provided")
+        self.knowledge_base = KnowledgeBase(api_key=self.api_key)
+
+        try:
+            self.knowledge_base.load_vector_store(knowledge_base_path)
+        except Exception:
+            print(f"No existing vector store found at {knowledge_base_path}. You may need to create one.")
+        self.llm = ChatGoogleGenerativeAI(
+            model=model,
+            google_api_key=self.api_key,
+            temperature=0.7,
+        )
+
+        self.chat_history: List[ChatMessage] = []
+        self.memory = ConversationBufferMemory(return_messages=True)
+        self.prompt_template = PromptTemplate(
+            input_variables=["chat_history", "knowledge_base_context", "human_input"],
+            template="""
+            Based on the conversation history and the most relevant context from the knowledge base, 
+            provide a helpful and accurate response. You are Anthra, a coal mine chatbot who will help the supervisor and others 
+            in the coal mine. You need to give concrete answers to the questions posed by the user. 
+
+            Knowledge Base Context:
+            {knowledge_base_context}
+
+            Conversation History:
+            {chat_history}
+
+            Human Input: {human_input}
+            AI Response:"""
+        )
     
-    except Exception as e:
-        error_result = {
-            "user_query": user_query,
-            "error": f"An error occurred: {str(e)}"
-        }
-        return json.dumps(error_result)
-
+    def _retrieve_knowledge_base_context(self, query: str, top_k: int = 3) -> str:
+        """
+        Retrieve most relevant context from the knowledge base.
+        
+        :param query: User's input query
+        :param top_k: Number of top similar chunks to retrieve
+        :return: Formatted context string
+        """
+        try:
+            similar_chunks = self.knowledge_base.query_vector_store(query, top_k=top_k)
+            context_str = "\n\n".join([
+                f"Source: {metadata['source']}\nContent: {chunk}"
+                for chunk, metadata in similar_chunks
+            ])
+            
+            return context_str
+        except Exception as e:
+            print(f"Error retrieving knowledge base context: {e}")
+            return ""
     
-members = ["helper", "plotter"]
-options = members + ["FINISH"]
+    def generate_response(self, user_input: str) -> str:
+        """
+        Generate a response using the knowledge base and language model.
+        
+        :param user_input: User's input message
+        :return: AI-generated response
+        """
+        knowledge_base_context = self._retrieve_knowledge_base_context(user_input)
+        chat_history_str = "\n".join([
+            f"{msg.role.capitalize()}: {msg.content}" 
+            for msg in self.chat_history[-5:] 
+        ])
 
-system_prompt = (
-    "You are a supervisor tasked with managing a conversation between the"
-    f" following workers: {members}. Given the user request, use the query"
-    " classification tool to determine the appropriate worker. Each worker"
-    " will perform a task and respond with their results and status."
-)
-
-
-class Router(BaseModel):
-    """Router for selecting the next agent to process the request."""
-    next: Literal["helper", "plotter", "FINISH"] = Field(
-        description="The next agent to route to. Use 'FINISH' when the conversation is complete."
-    )
-
-
-llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash-latest", google_api_key=GOOGLE_API_KEY).bind_tools(classify_query, plotter, query_chatbot)
-# llm = llm.bind_tools([classify_query])
-
-
-def supervisor_node(state: AgentState) -> AgentState:
-    messages = [
-        {"role": "system", "content": system_prompt},
-    ] + state["messages"]
-    
-    classification_result = classify_query.invoke({"query": state["messages"][-1].content})
-    next_ = classification_result
-    
-    if next_ == "FINISH":
-        next_ = END
-
-    return {"next": next_}
-
-
-#Creating plotter agent for chatbot
-plotter_agent = create_react_agent(
-    llm, tools=[plotter]
-)
-
-def plotter_node(state: AgentState) -> AgentState:
-    result = plotter_agent.invoke(state)
-    return {
-        "messages": [
-            HumanMessage(content=result["messages"][-1].content, name="plotter")
-        ]
-    }
-
-# Creating chatbot agent for chatbot
-chatbot_agent = create_react_agent(
-    llm, tools=[query_chatbot]
-)
-
-
-def chatbot_node(state: AgentState) -> AgentState:
-    result = chatbot_agent.invoke(state)
-    return {
-        "messages": [
-            HumanMessage(content=result["messages"][-1].content, name="helper")
-        ]
-    }
-    
-builder = StateGraph(AgentState)
-builder.add_edge(START, "supervisor")
-builder.add_node("supervisor", supervisor_node)
-builder.add_node("plotter", plotter_node)
-builder.add_node("helper", chatbot_node)
-
-for member in members:
-    builder.add_edge(member, "supervisor")
-
-builder.add_conditional_edges("supervisor", lambda state: state["next"])
-builder.add_edge(START, "supervisor")
-
-graph = builder.compile()
-
-
-for s in graph.stream(
-    {"messages": [("user", "How does the coal mining sector impact the environment?")]}, subgraphs=True
-):
-    print(s)
-    print("----")
+        prompt = self.prompt_template.format(
+            chat_history=chat_history_str,
+            knowledge_base_context=knowledge_base_context,
+            human_input=user_input
+        )
+        
+        # Generate response
+        try:
+            response = self.llm.invoke(prompt).content
+        except Exception as e:
+            print(f"Error generating response: {e}")
+            response = "I'm sorry, I couldn't generate a response at the moment."
+        
+        # Update chat history
+        self.chat_history.extend([
+            ChatMessage(role='human', content=user_input),
+            ChatMessage(role='ai', content=response)
+        ])
+        
+        # Update memory
+        self.memory.chat_memory.add_user_message(user_input)
+        self.memory.chat_memory.add_ai_message(response)
+        
+        return response

@@ -8,32 +8,44 @@
 #     "get_geographical_features": "http://localhost:8080/get_geographical_features",    
 # }
 
-endpoints = {
-    "get_asset": "http://192.168.173.53:3000/api/v1/asset",
-    "get_asset_type": "http://192.168.173.53:3000/api/v1/assettype",   
-    "get_position": "http://192.168.173.53:3000/api/v1/position", 
-    "get_round": "http://192.168.173.53:3000/api/v1/rounds",
-    "get_mine_info": "http://192.168.173.53:3000/api/v1/mine",
-    "get_shift_info": "http://192.168.173.53:3000/api/v1/shift",
-    "get_user_info": "http://192.168.173.53:3000/api/v1/user",
-    "get_smp_info": "http://192.168.173.53:3000/api/v1/smp"
-}
+# endpoints = {
+#     "get_asset": "http://192.168.137.53:3000/api/v1/asset",
+#     "get_asset_type": "http://192.168.137.53:3000/api/v1/assettype",   
+#     "get_position": "http://192.168.137.53:3000/api/v1/position", 
+#     "get_round": "http://192.168.137.53:3000/api/v1/rounds",
+#     "get_mine_info": "http://192.168.137.53:3000/api/v1/mine",
+#     "get_shift_info": "http://192.168.137.53:3000/api/v1/shift",
+#     "get_user_info": "http://192.168.137.53:3000/api/v1/user",
+#     "get_smp_info": "http://192.168.137.53:3000/api/v1/smp"
+# }
+
+# endpoints = {
+#     "get_asset": "http://192.168.137.53:3000/api/v1/asset",
+#     "get_asset_type": "http://192.168.137.53:3000/api/v1/assettype",   
+#     "get_position": "http://192.168.137.53:3000/api/v1/position", 
+#     "get_round": "http://192.168.137.53:3000/api/v1/rounds",
+#     "get_mine_info": "http://192.168.137.53:3000/api/v1/mine",
+#     "get_shift_info": "http://192.168.137.53:3000/api/v1/shift",
+#     "get_user_info": "http://192.168.137.53:3000/api/v1/user",
+#     "get_smp_info": "http://192.168.137.53:3000/api/v1/smp",
+#     "get_rounds_info": "http://192.168.137.53:3000/api/v1/rounds",
+#     # "get_iot_info": "http://192.168.137.53:3000/api/v1/iot"
+# }
 
 endpoints = {
-    "get_asset": "http://192.168.173.53:3000/api/v1/asset",
-    "get_asset_type": "http://192.168.173.53:3000/api/v1/assettype",   
-    "get_position": "http://192.168.173.53:3000/api/v1/position", 
-    "get_round": "http://192.168.173.53:3000/api/v1/rounds",
-    "get_mine_info": "http://192.168.173.53:3000/api/v1/mine",
-    "get_shift_info": "http://192.168.137.88:3000/api/v1/shift",
-    "get_user_info": "http://192.168.137.88:3000/api/v1/user",
-    "get_smp_info": "http://192.168.137.88:3000/api/v1/smp",
-    # "get_iot_info": "http://192.168.137.88:3000/api/v1/iot"
+    "get_shift_info": "/api/v1/shift",
+    "get_section_info": "/api/v1/section",
+    "get_mine_info": "/api/v1/mine",
+    "get_smp_rm_info: /api/v1/smp/rm"
+    "get_smp_ra_info: /api/v1/smp/ra"
+    "get_supervisor_info": "/api/v1/supervisor",
+    "get_user_info": "/api/v1/user",
+    "get_rounds_info": "/api/v1/rounds",
 }
 
 mapping = {
     "get_shift_info": "shift",
-    "get_user_info": "user",
-    "get_smp_info": "smp",
+    "get_smp_info": "smp/rm",
+    "get_round_info": "round",
     # "get_iot_info": "iot"
 }

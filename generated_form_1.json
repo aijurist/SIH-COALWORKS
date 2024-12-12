@@ -1,221 +1,528 @@
 {
-  "form_name": "Mining Equipment Maintenance & Inspection Form",
-  "form_description": "Comprehensive documentation of maintenance and inspection procedures for mining equipment, ensuring operational safety and regulatory compliance.",
-  "form_number": "FORM-1A",
+  "form_name": "Coal Mining Safety and Operational Assessment Form",
+  "form_description": "Comprehensive assessment of safety, operational readiness, environmental impact, and risk management in coal mining activities.",
   "sections": [
     {
-      "section_name": "Equipment Information",
-      "section_description": "Details about the equipment being maintained/inspected.",
-      "fields": [
-        {
-          "label": "Equipment ID",
-          "name": "equipment_id",
-          "type": "Text",
-          "description": "Unique identifier for the equipment.",
-          "placeholder": "Enter Equipment ID",
-          "required": true,
-          "variant": "Input",
-          "value": "",
-          "checked": true,
-          "options": null
-        },
-        {
-          "label": "Equipment Type",
-          "name": "equipment_type",
-          "type": "Text",
-          "description": "Type of equipment (e.g., Dozer, Excavator).",
-          "placeholder": "Enter Equipment Type",
-          "required": true,
-          "variant": "Combobox",
-          "value": "",
-          "checked": true,
-          "options": null
-        },
-        {
-          "label": "Manufacturer",
-          "name": "manufacturer",
-          "type": "Text",
-          "description": "Name of the equipment manufacturer.",
-          "placeholder": "Enter Manufacturer",
-          "required": true,
-          "variant": "Input",
-          "value": "",
-          "checked": true,
-          "options": null
-        },
-        {
-          "label": "Model Number",
-          "name": "model_number",
-          "type": "Text",
-          "description": "Model number of the equipment.",
-          "placeholder": "Enter Model Number",
-          "required": true,
-          "variant": "Input",
-          "value": "",
-          "checked": true,
-          "options": null
-        }
-      ]
-    },
-    {
-      "section_name": "Maintenance/Inspection Details",
-      "section_description": "Information about the specific maintenance or inspection being performed.",
+      "section_name": "Pre-Shift Safety Inspection",
+      "section_description": "Inspection of the work area before the start of the shift to identify and mitigate potential hazards.",
       "fields": [
         {
           "label": "Date",
-          "name": "date",
+          "name": "pre_shift_date",
           "type": "Date Picker",
-          "description": "Date of maintenance/inspection.",
+          "description": "Date of the inspection.",
           "placeholder": "Select Date",
           "required": true,
+          "disabled": false,
           "variant": "Date Picker",
-          "value": "",
-          "checked": true,
-          "options": null
+          "value": null,
+          "checked": false,
+          "rowIndex": 0,
+          "options": []
         },
         {
-          "label": "Time",
-          "name": "time",
-          "type": "Datetime Picker",
-          "description": "Time of maintenance/inspection.",
-          "placeholder": "Select Time",
-          "required": true,
-          "variant": "Datetime Picker",
-          "value": "",
-          "checked": true,
-          "options": null
-        },
-        {
-          "label": "Maintenance Type",
-          "name": "maintenance_type",
+          "label": "Shift",
+          "name": "pre_shift_shift",
           "type": "Select",
-          "description": "Type of maintenance (e.g., Routine, Corrective).",
-          "placeholder": "Select Type",
+          "description": "Shift during which the inspection is conducted.",
+          "placeholder": "Select Shift",
           "required": true,
-          "variant": "Select",
-          "value": "",
-          "checked": true,
-          "options": null
+          "disabled": false,
+          "variant": "Combobox",
+          "value": null,
+          "checked": false,
+          "rowIndex": 0,
+          "options": [
+            {
+              "label": "Morning",
+              "value": "morning"
+            },
+            {
+              "label": "Afternoon",
+              "value": "afternoon"
+            },
+            {
+              "label": "Night",
+              "value": "night"
+            }
+          ]
         },
         {
-          "label": "Inspection Checklist",
-          "name": "inspection_checklist",
-          "type": "Multi Select",
-          "description": "Items inspected (refer to standard checklist).",
-          "placeholder": "Select Items",
+          "label": "Inspector Name",
+          "name": "pre_shift_inspector",
+          "type": "Text",
+          "description": "Name of the inspector.",
+          "placeholder": "Enter Inspector Name",
           "required": true,
-          "variant": "Multi Select",
-          "value": "",
-          "checked": true,
-          "options": null
+          "disabled": false,
+          "variant": "Input",
+          "value": null,
+          "checked": false,
+          "rowIndex": 0,
+          "options": []
+        },
+        {
+          "label": "Area Inspected",
+          "name": "pre_shift_area",
+          "type": "Text",
+          "description": "Specific area inspected (e.g., Blasting Zone, Haulage Road).",
+          "placeholder": "Enter Area Inspected",
+          "required": true,
+          "disabled": false,
+          "variant": "Input",
+          "value": null,
+          "checked": false,
+          "rowIndex": 0,
+          "options": []
         }
       ]
     },
     {
-      "section_name": "Safety & Hazard Assessment",
-      "section_description": "Evaluation of potential hazards and safety measures.",
+      "section_name": "PPE Verification",
+      "section_description": "Verification of the availability and condition of Personal Protective Equipment.",
       "fields": [
         {
-          "label": "Operational Status",
-          "name": "operational_status",
+          "label": "Hard Hat",
+          "name": "ppe_hard_hat",
           "type": "Select",
-          "description": "Current operational status (Normal, Shutdown, Abnormal).",
-          "placeholder": "Select Status",
+          "description": "Condition of the hard hat.",
+          "placeholder": "Select Condition",
           "required": true,
-          "variant": "Select",
-          "value": "",
-          "checked": true,
-          "options": null
+          "disabled": false,
+          "variant": "Combobox",
+          "value": null,
+          "checked": false,
+          "rowIndex": 0,
+          "options": [
+            {
+              "label": "Good",
+              "value": "good"
+            },
+            {
+              "label": "Damaged",
+              "value": "damaged"
+            },
+            {
+              "label": "Missing",
+              "value": "missing"
+            }
+          ]
         },
         {
-          "label": "Potential Hazards",
-          "name": "potential_hazards",
-          "type": "Textarea",
-          "description": "Describe potential hazards associated with the maintenance.",
-          "placeholder": "Enter Hazards",
+          "label": "Safety Glasses",
+          "name": "ppe_safety_glasses",
+          "type": "Select",
+          "description": "Condition of the safety glasses.",
+          "placeholder": "Select Condition",
           "required": true,
+          "disabled": false,
+          "variant": "Combobox",
+          "value": null,
+          "checked": false,
+          "rowIndex": 0,
+          "options": [
+            {
+              "label": "Good",
+              "value": "good"
+            },
+            {
+              "label": "Damaged",
+              "value": "damaged"
+            },
+            {
+              "label": "Missing",
+              "value": "missing"
+            }
+          ]
+        },
+        {
+          "label": "Hearing Protection",
+          "name": "ppe_hearing_protection",
+          "type": "Select",
+          "description": "Condition of the hearing protection.",
+          "placeholder": "Select Condition",
+          "required": true,
+          "disabled": false,
+          "variant": "Combobox",
+          "value": null,
+          "checked": false,
+          "rowIndex": 0,
+          "options": [
+            {
+              "label": "Good",
+              "value": "good"
+            },
+            {
+              "label": "Damaged",
+              "value": "damaged"
+            },
+            {
+              "label": "Missing",
+              "value": "missing"
+            }
+          ]
+        },
+        {
+          "label": "Safety Boots",
+          "name": "ppe_safety_boots",
+          "type": "Select",
+          "description": "Condition of the safety boots.",
+          "placeholder": "Select Condition",
+          "required": true,
+          "disabled": false,
+          "variant": "Combobox",
+          "value": null,
+          "checked": false,
+          "rowIndex": 0,
+          "options": [
+            {
+              "label": "Good",
+              "value": "good"
+            },
+            {
+              "label": "Damaged",
+              "value": "damaged"
+            },
+            {
+              "label": "Missing",
+              "value": "missing"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_name": "Equipment Readiness",
+      "section_description": "Assessment of the operational readiness of critical equipment.",
+      "fields": [
+        {
+          "label": "Equipment Name",
+          "name": "equipment_name",
+          "type": "Text",
+          "description": "Name of the equipment (e.g., Excavator, Drill Rig).",
+          "placeholder": "Enter Equipment Name",
+          "required": true,
+          "disabled": false,
+          "variant": "Input",
+          "value": null,
+          "checked": false,
+          "rowIndex": 0,
+          "options": []
+        },
+        {
+          "label": "Operational Status",
+          "name": "equipment_status",
+          "type": "Select",
+          "description": "Current operational status of the equipment.",
+          "placeholder": "Select Status",
+          "required": true,
+          "disabled": false,
+          "variant": "Combobox",
+          "value": null,
+          "checked": false,
+          "rowIndex": 0,
+          "options": [
+            {
+              "label": "Operational",
+              "value": "operational"
+            },
+            {
+              "label": "Under Maintenance",
+              "value": "maintenance"
+            },
+            {
+              "label": "Out of Service",
+              "value": "out_of_service"
+            }
+          ]
+        },
+        {
+          "label": "Last Inspection Date",
+          "name": "equipment_inspection_date",
+          "type": "Date Picker",
+          "description": "Date of the last inspection.",
+          "placeholder": "Select Date",
+          "required": true,
+          "disabled": false,
+          "variant": "Date Picker",
+          "value": null,
+          "checked": false,
+          "rowIndex": 0,
+          "options": []
+        },
+        {
+          "label": "Next Inspection Date",
+          "name": "equipment_next_inspection",
+          "type": "Date Picker",
+          "description": "Scheduled date for the next inspection.",
+          "placeholder": "Select Date",
+          "required": true,
+          "disabled": false,
+          "variant": "Date Picker",
+          "value": null,
+          "checked": false,
+          "rowIndex": 0,
+          "options": []
+        }
+      ]
+    },
+    {
+      "section_name": "Emergency Response Preparedness",
+      "section_description": "Evaluation of the preparedness for various emergency scenarios.",
+      "fields": [
+        {
+          "label": "Emergency Scenario",
+          "name": "emergency_scenario",
+          "type": "Select",
+          "description": "Type of emergency scenario (e.g., Fire, Explosion, Ground Collapse).",
+          "placeholder": "Select Scenario",
+          "required": true,
+          "disabled": false,
+          "variant": "Combobox",
+          "value": null,
+          "checked": false,
+          "rowIndex": 0,
+          "options": [
+            {
+              "label": "Fire",
+              "value": "fire"
+            },
+            {
+              "label": "Explosion",
+              "value": "explosion"
+            },
+            {
+              "label": "Ground Collapse",
+              "value": "ground_collapse"
+            }
+          ]
+        },
+        {
+          "label": "Response Plan",
+          "name": "emergency_response_plan",
+          "type": "Textarea",
+          "description": "Description of the emergency response plan.",
+          "placeholder": "Enter Response Plan",
+          "required": true,
+          "disabled": false,
           "variant": "Textarea",
-          "value": "",
-          "checked": true,
-          "options": null
+          "value": null,
+          "checked": false,
+          "rowIndex": 0,
+          "options": []
+        },
+        {
+          "label": "Communication System",
+          "name": "emergency_communication",
+          "type": "Select",
+          "description": "Status of the emergency communication system.",
+          "placeholder": "Select Status",
+          "required": true,
+          "disabled": false,
+          "variant": "Combobox",
+          "value": null,
+          "checked": false,
+          "rowIndex": 0,
+          "options": [
+            {
+              "label": "Functional",
+              "value": "functional"
+            },
+            {
+              "label": "Malfunctioning",
+              "value": "malfunctioning"
+            },
+            {
+              "label": "Not Available",
+              "value": "not_available"
+            }
+          ]
+        },
+        {
+          "label": "First Aid Equipment",
+          "name": "emergency_first_aid",
+          "type": "Select",
+          "description": "Availability and condition of first aid equipment.",
+          "placeholder": "Select Condition",
+          "required": true,
+          "disabled": false,
+          "variant": "Combobox",
+          "value": null,
+          "checked": false,
+          "rowIndex": 0,
+          "options": [
+            {
+              "label": "Available and Adequate",
+              "value": "adequate"
+            },
+            {
+              "label": "Insufficient",
+              "value": "insufficient"
+            },
+            {
+              "label": "Not Available",
+              "value": "not_available"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_name": "Environmental Monitoring",
+      "section_description": "Monitoring of environmental parameters to ensure compliance with regulations.",
+      "fields": [
+        {
+          "label": "Parameter",
+          "name": "env_parameter",
+          "type": "Select",
+          "description": "Environmental parameter being monitored (e.g., Air Quality, Water Quality, Noise Levels).",
+          "placeholder": "Select Parameter",
+          "required": true,
+          "disabled": false,
+          "variant": "Combobox",
+          "value": null,
+          "checked": false,
+          "rowIndex": 0,
+          "options": [
+            {
+              "label": "Air Quality",
+              "value": "air_quality"
+            },
+            {
+              "label": "Water Quality",
+              "value": "water_quality"
+            },
+            {
+              "label": "Noise Levels",
+              "value": "noise_levels"
+            }
+          ]
+        },
+        {
+          "label": "Measurement",
+          "name": "env_measurement",
+          "type": "Number",
+          "description": "Recorded measurement of the parameter.",
+          "placeholder": "Enter Measurement",
+          "required": true,
+          "disabled": false,
+          "variant": "Input",
+          "value": null,
+          "checked": false,
+          "rowIndex": 0,
+          "options": []
+        },
+        {
+          "label": "Unit",
+          "name": "env_unit",
+          "type": "Text",
+          "description": "Unit of measurement (e.g., ppm, dB, pH).",
+          "placeholder": "Enter Unit",
+          "required": true,
+          "disabled": false,
+          "variant": "Input",
+          "value": null,
+          "checked": false,
+          "rowIndex": 0,
+          "options": []
+        },
+        {
+          "label": "Compliance Status",
+          "name": "env_compliance",
+          "type": "Select",
+          "description": "Compliance status with regulatory limits.",
+          "placeholder": "Select Status",
+          "required": true,
+          "disabled": false,
+          "variant": "Combobox",
+          "value": null,
+          "checked": false,
+          "rowIndex": 0,
+          "options": [
+            {
+              "label": "Compliant",
+              "value": "compliant"
+            },
+            {
+              "label": "Non-Compliant",
+              "value": "non_compliant"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_name": "Specific Hazard Mitigation Protocols",
+      "section_description": "Specific protocols for mitigating identified hazards, especially fly rock during blasting.",
+      "fields": [
+        {
+          "label": "Hazard",
+          "name": "hazard_type",
+          "type": "Text",
+          "description": "Type of hazard (e.g., Fly Rock, Water Ingress, Misfire).",
+          "placeholder": "Enter Hazard Type",
+          "required": true,
+          "disabled": false,
+          "variant": "Input",
+          "value": null,
+          "checked": false,
+          "rowIndex": 0,
+          "options": []
         },
         {
           "label": "Mitigation Measures",
-          "name": "mitigation_measures",
+          "name": "hazard_mitigation",
           "type": "Textarea",
-          "description": "Describe the mitigation measures implemented.",
-          "placeholder": "Enter Measures",
+          "description": "Description of the mitigation measures implemented.",
+          "placeholder": "Enter Mitigation Measures",
           "required": true,
+          "disabled": false,
           "variant": "Textarea",
-          "value": "",
-          "checked": true,
-          "options": null
+          "value": null,
+          "checked": false,
+          "rowIndex": 0,
+          "options": []
         },
         {
-          "label": "Safety Equipment Used",
-          "name": "safety_equipment",
-          "type": "Multi Select",
-          "description": "List safety equipment used during the activity.",
-          "placeholder": "Select Equipment",
-          "required": true,
-          "variant": "Multi Select",
-          "value": "",
-          "checked": true,
-          "options": null
-        }
-      ]
-    },
-    {
-      "section_name": "Personnel & Sign-off",
-      "section_description": "Information about personnel involved and authorization.",
-      "fields": [
-        {
-          "label": "Technician Name",
-          "name": "technician_name",
+          "label": "Responsible Person",
+          "name": "hazard_responsible",
           "type": "Text",
-          "description": "Name of the technician performing the maintenance.",
-          "placeholder": "Enter Name",
+          "description": "Name of the person responsible for implementing the mitigation measures.",
+          "placeholder": "Enter Responsible Person",
           "required": true,
+          "disabled": false,
           "variant": "Input",
-          "value": "",
-          "checked": true,
-          "options": null
+          "value": null,
+          "checked": false,
+          "rowIndex": 0,
+          "options": []
         },
         {
-          "label": "Supervisor Name",
-          "name": "supervisor_name",
-          "type": "Text",
-          "description": "Name of the supervising personnel.",
-          "placeholder": "Enter Name",
+          "label": "Completion Status",
+          "name": "hazard_completion",
+          "type": "Select",
+          "description": "Status of the mitigation measures implementation.",
+          "placeholder": "Select Status",
           "required": true,
-          "variant": "Input",
-          "value": "",
-          "checked": true,
-          "options": null
-        },
-        {
-          "label": "Technician Signature",
-          "name": "technician_signature",
-          "type": "Signature Input",
-          "description": "Technician's signature.",
-          "placeholder": "Sign Here",
-          "required": true,
-          "variant": "Signature Input",
-          "value": "",
-          "checked": true,
-          "options": null
-        },
-        {
-          "label": "Supervisor Signature",
-          "name": "supervisor_signature",
-          "type": "Signature Input",
-          "description": "Supervisor's signature.",
-          "placeholder": "Sign Here",
-          "required": true,
-          "variant": "Signature Input",
-          "value": "",
-          "checked": true,
-          "options": null
+          "disabled": false,
+          "variant": "Combobox",
+          "value": null,
+          "checked": false,
+          "rowIndex": 0,
+          "options": [
+            {
+              "label": "Complete",
+              "value": "complete"
+            },
+            {
+              "label": "In Progress",
+              "value": "in_progress"
+            },
+            {
+              "label": "Not Started",
+              "value": "not_started"
+            }
+          ]
         }
       ]
     }

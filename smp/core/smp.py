@@ -35,7 +35,7 @@ class HazardAnalysisChain:
             The user has given you additional information: {input_info}. Use this information if it is clear and relevant to the analysis. 
             
             Knowledge Base Information: {knowledge_base_info}. Use only relevant information from the knowledge base information given.
-            Real time data information in concise version: {iot_data}, {shift_data}, {user_data}, {smp_data}
+            Real time data information in concise version: will be given later
             Follow these instructions for the hazard analysis:
             
             1. Incorporate insights from the context information and input provided.
@@ -52,7 +52,7 @@ class HazardAnalysisChain:
             Return the output as JSON in the following format:
             {format_instruction}
             ''',
-            input_variables=["activity_name", "knowledge_base_info", "input_info", "iot_data", "shift_data", "user_data", "smp_data"],
+            input_variables=["activity_name", "knowledge_base_info", "input_info"],
             partial_variables={"format_instruction": self.parser.get_format_instructions()},
         )
 
@@ -86,16 +86,17 @@ class HazardAnalysisChain:
         except Exception as e:
             print(f"Error querying knowledge base: {e}")
             return None
-
-        rtd_data = rtd_analyser(activity_name)
+        
+        
+        rtd_data = {"shift": "shift_dat", "smp_data": "smp_data"}
+        # rtd_data = rtd_analyser(activity_name)
         result = self.chain.invoke({
             "activity_name": activity_name,
             "knowledge_base_info": formatted_data,
             "input_info": input_info,
-            "iot_data":{},
-            "shift_data": rtd_data["shift"],
-            "user_data":rtd_data["user"],
-            "smp_data": rtd_data["smp"],
+            # "iot_data":{},
+            # "shift_data": rtd_data["shift"] or {},
+            # "smp_data": rtd_data["smp"] or {},
             
         })
         
